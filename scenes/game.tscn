@@ -1,0 +1,359 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvqmw7yj2x9xi"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_game"]
+[ext_resource type="Script" path="res://scripts/game_board.gd" id="2_board"]
+[ext_resource type="Script" path="res://scripts/next_piece_preview.gd" id="3_preview"]
+[ext_resource type="Script" path="res://scripts/game_ui.gd" id="4_ui"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_board"]
+bg_color = Color(0.15, 0.15, 0.2, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.3, 0.3, 0.4, 1)
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_game")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.08, 0.12, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="LeftPanel" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ScoreContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftPanel"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_board")
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftPanel/ScoreContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Padding" type="MarginContainer" parent="MarginContainer/HBoxContainer/LeftPanel/ScoreContainer/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Content" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftPanel/ScoreContainer/VBox/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer/LeftPanel/ScoreContainer/VBox/Padding/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.6, 0.7, 1)
+theme_override_font_sizes/font_size = 16
+text = "SCORE"
+horizontal_alignment = 1
+
+[node name="ScoreValue" type="Label" parent="MarginContainer/HBoxContainer/LeftPanel/ScoreContainer/VBox/Padding/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+
+[node name="LevelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftPanel"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_board")
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftPanel/LevelContainer"]
+layout_mode = 2
+
+[node name="Padding" type="MarginContainer" parent="MarginContainer/HBoxContainer/LeftPanel/LevelContainer/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Content" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftPanel/LevelContainer/VBox/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/HBoxContainer/LeftPanel/LevelContainer/VBox/Padding/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.6, 0.7, 1)
+theme_override_font_sizes/font_size = 16
+text = "LEVEL"
+horizontal_alignment = 1
+
+[node name="LevelValue" type="Label" parent="MarginContainer/HBoxContainer/LeftPanel/LevelContainer/VBox/Padding/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "1"
+horizontal_alignment = 1
+
+[node name="LinesContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftPanel"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_board")
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftPanel/LinesContainer"]
+layout_mode = 2
+
+[node name="Padding" type="MarginContainer" parent="MarginContainer/HBoxContainer/LeftPanel/LinesContainer/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Content" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftPanel/LinesContainer/VBox/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LinesLabel" type="Label" parent="MarginContainer/HBoxContainer/LeftPanel/LinesContainer/VBox/Padding/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.6, 0.7, 1)
+theme_override_font_sizes/font_size = 16
+text = "LINES"
+horizontal_alignment = 1
+
+[node name="LinesValue" type="Label" parent="MarginContainer/HBoxContainer/LeftPanel/LinesContainer/VBox/Padding/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.4, 1)
+theme_override_font_sizes/font_size = 28
+text = "0"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GameBoardContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BoardPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/GameBoardContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_board")
+
+[node name="GameBoard" type="Control" parent="MarginContainer/HBoxContainer/GameBoardContainer/BoardPanel"]
+custom_minimum_size = Vector2(300, 600)
+layout_mode = 2
+script = ExtResource("2_board")
+
+[node name="RightPanel" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="NextPieceContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/RightPanel"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_board")
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/NextPieceContainer"]
+layout_mode = 2
+
+[node name="Padding" type="MarginContainer" parent="MarginContainer/HBoxContainer/RightPanel/NextPieceContainer/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Content" type="VBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/NextPieceContainer/VBox/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="NextLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/NextPieceContainer/VBox/Padding/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.6, 0.7, 1)
+theme_override_font_sizes/font_size = 16
+text = "NEXT"
+horizontal_alignment = 1
+
+[node name="NextPiecePreview" type="Control" parent="MarginContainer/HBoxContainer/RightPanel/NextPieceContainer/VBox/Padding/Content"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+script = ExtResource("3_preview")
+
+[node name="ControlsContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/RightPanel"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_board")
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/ControlsContainer"]
+layout_mode = 2
+
+[node name="Padding" type="MarginContainer" parent="MarginContainer/HBoxContainer/RightPanel/ControlsContainer/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Content" type="VBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/ControlsContainer/VBox/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ControlsLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/ControlsContainer/VBox/Padding/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.6, 0.7, 1)
+theme_override_font_sizes/font_size = 16
+text = "CONTROLS"
+horizontal_alignment = 1
+
+[node name="ControlsList" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/ControlsContainer/VBox/Padding/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.85, 1)
+theme_override_font_sizes/font_size = 12
+text = "← → Move
+↓ Soft Drop
+Space Hard Drop
+↑ Rotate
+P Pause"
+horizontal_alignment = 0
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GameUI" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_ui")
+
+[node name="GameOverScreen" type="ColorRect" parent="GameUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8)
+
+[node name="CenterContainer" type="CenterContainer" parent="GameUI/GameOverScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/GameOverScreen/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="GameOverLabel" type="Label" parent="GameUI/GameOverScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+theme_override_font_sizes/font_size = 64
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="GameUI/GameOverScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Final Score: 0"
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="GameUI/GameOverScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="RestartButton" type="Button" parent="GameUI/GameOverScreen/CenterContainer/VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "RESTART"
+
+[node name="MenuButton" type="Button" parent="GameUI/GameOverScreen/CenterContainer/VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "MAIN MENU"
+
+[node name="PauseScreen" type="ColorRect" parent="GameUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="CenterContainer" type="CenterContainer" parent="GameUI/PauseScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/PauseScreen/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="PausedLabel" type="Label" parent="GameUI/PauseScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 56
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="ResumeHint" type="Label" parent="GameUI/PauseScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 24
+text = "Press P to Resume"
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="GameUI/PauseScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ResumeButton" type="Button" parent="GameUI/PauseScreen/CenterContainer/VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "RESUME"
+
+[node name="MenuButton" type="Button" parent="GameUI/PauseScreen/CenterContainer/VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "MAIN MENU"
+
+[connection signal="restart_pressed" from="GameUI" to="." method="_on_game_ui_restart_pressed"]
+[connection signal="menu_pressed" from="GameUI" to="." method="_on_game_ui_menu_pressed"]
+[connection signal="resume_pressed" from="GameUI" to="." method="_on_game_ui_resume_pressed"]
